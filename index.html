@@ -8,8 +8,11 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            display: grid;
+            display: flex;
+            flex-direction: column;
             align-items: center;
+            justify-items: center;
+            justify-content: center;
             height: 100vh;
             margin: 0;
             padding: 0 20px;
@@ -23,6 +26,16 @@
             align-items: stretch;
             width: 100%;
             max-width: 500px;
+            /* Limits width on larger screens */
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            width: 100%;
+            max-width: 500px;
+            margin: 5vh;
             /* Limits width on larger screens */
         }
 
@@ -60,6 +73,8 @@
         .history-container {
             margin-top: 30px;
             text-align: center;
+            display: flex;
+            flex-direction: column;
         }
 
         h3 {
@@ -96,19 +111,21 @@
 <body>
 
     <div class="container">
-        <button onclick="openSelectedURL()">Go to URL</button>
-
         <select id="urlDropdown">
-            <option value="foodora://">foodora</option>
-            <option value="foodora-st://">foodora-st</option>
+            <option value="foodoraeu://">foodoraeu</option>
+            <option value="foodoraeu-st://">foodoraeu-st</option>
             <option value="foodpanda://">foodpanda</option>
             <option value="foodpanda-st://">foodpanda-st</option>
         </select>
 
         <input type="text" id="urlPath" placeholder="Enter URL path (optional)">
 
-        <span class="link-text" id="selectedURL">Link: foodora://</span>
+        <span class="link-text" id="selectedURL">Link: foodoraeu://</span>
 
+    </div>
+
+    <div class="button-container">
+        <button onclick="openSelectedURL()">Go to URL</button>
     </div>
 
     <!-- History section moved below the main part -->
@@ -133,14 +150,14 @@
         function updateLinkText() {
             const selectedURL = dropdown.value;
             const urlPath = urlPathInput.value.trim();
-            linkText.textContent = 'Link: ' + selectedURL + (urlPath ? '/' + urlPath : '');
+            linkText.textContent = 'Link: ' + selectedURL + (urlPath ? urlPath : '');
         }
 
         // Open the selected URL with the appended path and store it in history
         function openSelectedURL() {
             const selectedURL = dropdown.value;
             const urlPath = urlPathInput.value.trim();
-            const fullURL = selectedURL + (urlPath ? '/' + urlPath : '');
+            const fullURL = selectedURL + (urlPath ? urlPath : '');
             window.open(fullURL, '_blank');
 
             // Store the opened URL in history (limit to last 5 entries)
