@@ -198,7 +198,7 @@
             const selectedHistoryURL = historyDropdown.value;
             if (selectedHistoryURL) {
                 // Split the URL into base and path
-                const [baseURL, ...path] = selectedHistoryURL.split('/');
+                const [baseURL, ...path] = selectedHistoryURL.split('://');
                 dropdown.value = baseURL + '://'; // Set base URL in dropdown
                 urlPathInput.value = path.join('/'); // Set path in the input field
                 updateLinkText(); // Update the link text to reflect the change
