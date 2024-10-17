@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button with Dropdown URL Selector and Path Appender</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        select,
+        input {
+            margin-left: 15px;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .link-text {
+            margin-left: 15px;
+            font-size: 18px;
+        }
+
+        input[type="text"] {
+            width: 200px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <button onclick="openSelectedURL()">Go to URL</button>
+
+        <select id="urlDropdown">
+            <option value="foodora://">foodora</option>
+            <option value="foodora-st://">foodora-st</option>
+            <option value="foodpanda://">foodpanda</option>
+            <option value="foodpanda-st://">foodpanda-st</option>
+            <!-- Add more options as needed -->
+            </option>
+        </select>
+
+        <input type="text" id="urlPath" placeholder="Enter URL path (optional)">
+
+        <span class="link-text" id="selectedURL">Link: foodora</span>
+    </div>
+
+    <script>
+        const dropdown = document.getElementById('urlDropdown');
+        const urlPathInput = document.getElementById('urlPath');
+        const linkText = document.getElementById('selectedURL');
+
+        // Update the displayed link text when a new URL is selected or path is entered
+        dropdown.addEventListener('change', updateLinkText);
+        urlPathInput.addEventListener('input', updateLinkText);
+
+        function updateLinkText() {
+            const selectedURL = dropdown.value;
+            const urlPath = urlPathInput.value.trim();
+            linkText.textContent = 'Link: ' + selectedURL + (urlPath ? urlPath : '');
+        }
+
+        // Open the selected URL with the appended path
+        function openSelectedURL() {
+            const selectedURL = dropdown.value;
+            const urlPath = urlPathInput.value.trim();
+            const fullURL = selectedURL + (urlPath ? urlPath : '');
+            window.open(fullURL, '_blank');
+        }
+    </script>
+
+</body>
+
+</html>
