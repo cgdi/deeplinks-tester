@@ -13,11 +13,18 @@
             justify-content: center;
             height: 100vh;
             margin: 0;
+            padding: 0 20px;
+            /* Adds padding on mobile */
+            box-sizing: border-box;
         }
 
         .container {
             display: flex;
-            align-items: center;
+            flex-direction: column;
+            align-items: stretch;
+            width: 100%;
+            max-width: 500px;
+            /* Limits width on larger screens */
         }
 
         button {
@@ -27,6 +34,8 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            width: 100%;
+            /* Full width on mobile */
         }
 
         button:hover {
@@ -35,18 +44,39 @@
 
         select,
         input {
-            margin-left: 15px;
+            margin: 10px 0;
             padding: 10px;
             font-size: 16px;
+            width: 100%;
+            /* Full width on mobile */
+            box-sizing: border-box;
         }
 
         .link-text {
-            margin-left: 15px;
-            font-size: 18px;
+            margin-top: 10px;
+            font-size: 16px;
+            text-align: center;
         }
 
-        input[type="text"] {
-            width: 200px;
+        /* Media queries for larger screens */
+        @media (min-width: 600px) {
+            .container {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            select,
+            input {
+                width: auto;
+                margin-left: 15px;
+                flex-grow: 1;
+            }
+
+            .link-text {
+                margin-left: 15px;
+                text-align: left;
+            }
         }
     </style>
 </head>
@@ -61,13 +91,11 @@
             <option value="foodora-st://">foodora-st</option>
             <option value="foodpanda://">foodpanda</option>
             <option value="foodpanda-st://">foodpanda-st</option>
-            <!-- Add more options as needed -->
-            </option>
         </select>
 
         <input type="text" id="urlPath" placeholder="Enter URL path (optional)">
 
-        <span class="link-text" id="selectedURL">Link: foodora</span>
+        <span class="link-text" id="selectedURL">Link: foodora://</span>
     </div>
 
     <script>
